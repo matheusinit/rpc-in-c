@@ -57,6 +57,7 @@ main (int argc, char *argv[])
         printf("----- Menu -----\n");
         printf("[0] Binário\n");
         printf("[1] Hexadecimal\n");
+	printf("[2] Octal\n");
 	printf("Sua escolha: ");
         scanf("%d", &convertTo);
 

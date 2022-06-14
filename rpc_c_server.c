@@ -20,6 +20,29 @@ void convertDecToBin(int number) {
 	}
 }
 
+int convertDecToOctal(int number) 
+{
+	int i,a;
+	int octal;
+	int n = number;
+
+	if(n<=7){
+		octal=n;
+	}
+
+	else{
+		while(n>=8)
+		{
+			a=n%8;
+			n=n/8;
+		}
+		n=n%8;
+	}
+
+printf("%d", octal);
+
+}
+
 int *
 convert_1_svc(client_input *argp, struct svc_req *rqstp)
 {
@@ -40,7 +63,13 @@ convert_1_svc(client_input *argp, struct svc_req *rqstp)
 			break;
 		case 1:
 			printf("%x\n", argp->number);
+			printf("\n");
 			break;
+		case 2:
+			printf("Octal: ")/
+			convertDecToOctal(argp->number);
+			printf("\n");
+			break;	
 		default:
 			printf("Error: An invalid choice was inserted\n");
 	}
