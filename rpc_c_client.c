@@ -6,64 +6,62 @@
 
 #include "rpc_c.h"
 
-
-void
-conversor_prog_1(char *host, int numberToConvert, int convertTo)
+void conversor_prog_1(char *host, int numberToConvert, int convertTo)
 {
 	CLIENT *clnt;
-	int  *result_1;
-	client_input  convert_1_arg;
+	int *result_1;
+	client_input convert_1_arg;
 
 	convert_1_arg.number = numberToConvert;
 	convert_1_arg.convertTo = convertTo;
 
-#ifndef	DEBUG
-	clnt = clnt_create (host, CONVERSOR_PROG, CONVERSOR_VERS, "udp");
-	if (clnt == NULL) {
-		clnt_pcreateerror (host);
-		exit (1);
+#ifndef DEBUG
+	clnt = clnt_create(host, CONVERSOR_PROG, CONVERSOR_VERS, "udp");
+	if (clnt == NULL)
+	{
+		clnt_pcreateerror(host);
+		exit(1);
 	}
-#endif	/* DEBUG */
+#endif /* DEBUG */
 
 	result_1 = convert_1(&convert_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+	if (result_1 == (int *)NULL)
+	{
+		clnt_perror(clnt, "call failed");
 	}
-#ifndef	DEBUG
-	clnt_destroy (clnt);
-#endif	 /* DEBUG */
+#ifndef DEBUG
+	clnt_destroy(clnt);
+#endif /* DEBUG */
 }
 
-
-int
-main (int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *host;
 
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
-		exit (1);
+	if (argc < 2)
+	{
+		printf("usage: %s server_host\n", argv[0]);
+		exit(1);
 	}
 	host = argv[1];
 
-
 	int numberToConvert;
-        int convertTo;
+	int convertTo;
 
-        printf(" - Bem-vindo ao conversor de números decimais em números binários e hexadecimais\n");
-        printf("Insira o número para converter: ");
-        scanf("%d", &numberToConvert);
+	printf(" - Bem-vindo ao conversor de números decimais em números binários e hexadecimais\n");
+	printf("Insira o número para converter: ");
+	scanf("%d", &numberToConvert);
 
-        printf("----- Menu -----\n");
-        printf("[0] Binário\n");
-        printf("[1] Hexadecimal\n");
+	printf("----- Menu -----\n");
+	printf("[0] Binário\n");
+	printf("[1] Hexadecimal\n");
 	printf("[2] Octal\n");
 	printf("Sua escolha: ");
-        scanf("%d", &convertTo);
+	scanf("%d", &convertTo);
 
 	printf("\n");
 
-	conversor_prog_1 (host, numberToConvert, convertTo);
+	conversor_prog_1(host, numberToConvert, convertTo);
 
-	exit (0);
+	exit(0);
 }

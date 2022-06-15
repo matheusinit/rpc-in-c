@@ -6,72 +6,75 @@
 
 #include "rpc_c.h"
 
-void convertDecToBin(int number) {
+void convertDecToBin(int number)
+{
 	int a[10], i;
 	int n = number;
 
-	for (i = 0; n > 0; i++) {
+	for (i = 0; n > 0; i++)
+	{
 		a[i] = n % 2;
-		n = n/2;
+		n = n / 2;
 	}
-	
-	for (i = i - 1; i >= 0; i--) {
+
+	for (i = i - 1; i >= 0; i--)
+	{
 		printf("%d", a[i]);
 	}
 }
 
-int convertDecToOctal(int number) 
+int convertDecToOctal(int number)
 {
-	int i,a;
+	int i, a;
 	int octal;
 	int n = number;
 
-	if(n<=7){
-		octal=n;
+	if (n <= 7)
+	{
+		octal = n;
 	}
 
-	else{
-		while(n>=8)
+	else
+	{
+		while (n >= 8)
 		{
-			a=n%8;
-			n=n/8;
+			a = n % 8;
+			n = n / 8;
 		}
-		n=n%8;
+		n = n % 8;
 	}
 
-printf("%d", octal);
-
+	printf("%d", octal);
 }
 
-int *
-convert_1_svc(client_input *argp, struct svc_req *rqstp)
+int *convert_1_svc(client_input *argp, struct svc_req *rqstp)
 {
-	static int  result;
-	
+	static int result;
+
 	/*
 	 * insert server code here
 	 */
-	
+
 	int choice = argp->convertTo;
 	int *bin;
 
-	switch (choice) {
-		case 0:
-			printf("Binário: ");
-			convertDecToBin(argp->number);
-			printf("\n");
-			break;
-		case 1:
-			printf("%x\n", argp->number);
-			printf("\n");
-			break;
-		case 2:
-			printf("Octal: ")/
-			convertDecToOctal(argp->number);
-			printf("\n");
-			break;	
-		default:
-			printf("Error: An invalid choice was inserted\n");
+	switch (choice)
+	{
+	case 0:
+		printf("Binário: ");
+		convertDecToBin(argp->number);
+		printf("\n");
+		break;
+	case 1:
+		printf("Hexadecimal: %x\n", argp->number);
+		break;
+	case 2:
+		printf("Octal: ");
+		convertDecToOctal(argp->number);
+		printf("\n");
+		break;
+	default:
+		printf("Error: An invalid choice was inserted\n");
 	}
 
 	return &result;
